@@ -1,12 +1,19 @@
+let player;
+let spaceshipImg;
+let backgroundImg; 
+
+function preload() {
+  spaceshipImg = loadImage("assets/spaceship.png");
+  backgroundImg = loadImage("assets/space-bg.png"); 
+}
+
 function setup() {
-    createCanvas(800, 600);
-    setupDebugConsole();
+  createCanvas(800, 600);
+  player = new Player(width / 2, height - 115, spaceshipImg);
 }
 
 function draw() {
-    background(255); 
-    textSize(32); // Set the text size
-    textAlign(CENTER, CENTER); 
-    fill(0); 
-    text("Hello World", width / 2, height / 2); 
+  image(backgroundImg, 0, 0, width, height); 
+  player.move();
+  player.display();
 }
