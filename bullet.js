@@ -10,7 +10,7 @@ class Bullet {
     }
   
     display() {
-      fill(255, 255, 0); // yellow bullet
+      fill(255, 255, 0); 
       noStroke();
       ellipse(this.x, this.y, 8, 8);
     }
