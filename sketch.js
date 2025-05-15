@@ -18,22 +18,20 @@ function setup() {
 
 function draw() {
   image(backgroundImg, 0, 0, width, height);
-
-  // Update and display player
   player.move();
   player.display();
 
-  // Update and display player bullets
+  // Update and display player bullets + check collisions
   for (let i = bullets.length - 1; i >= 0; i--) {
-    bullets[i].update();
+    let hit = bullets[i].update(enemies);
     bullets[i].display();
 
-    if (bullets[i].isOffScreen()) {
+    if (hit || bullets[i].isOffScreen()) {
       bullets.splice(i, 1);
     }
   }
 
-  // Spawn enemies every 60 frames (~1 second)
+ 
   enemySpawnTimer++;
   if (enemySpawnTimer > 60) {
     let enemyX = random(40, width - 40);
@@ -41,11 +39,15 @@ function draw() {
     enemySpawnTimer = 0;
   }
 
-  // Update and display enemies
+  
   for (let i = enemies.length - 1; i >= 0; i--) {
     enemies[i].update();
     enemies[i].display();
-    enemies[i].shoot(enemyBullets);
+
+    // Enemy shoots every 90 frames
+    if (frameCount % 90 === 0) {
+      enemyBullets.push(new EnemyBullet(enemies[i].x + 20, enemies[i].y + 20));
+    }
 
     if (enemies[i].isOffScreen()) {
       enemies.splice(i, 1);
@@ -57,9 +59,24 @@ function draw() {
     enemyBullets[i].update();
     enemyBullets[i].display();
 
+    if (enemyBullets[i].hits(player)) {
+      player.takeDamage();
+      enemyBullets.splice(i, 1);
+      continue;
+    }
+
     if (enemyBullets[i].isOffScreen()) {
       enemyBullets.splice(i, 1);
     }
+  }
+
+  // Game over
+  if (player.health <= 0) {
+    noLoop();
+    fill(255, 0, 0);
+    textSize(50);
+    textAlign(CENTER);
+    text("GAME OVER", width / 2, height / 2);
   }
 }
 

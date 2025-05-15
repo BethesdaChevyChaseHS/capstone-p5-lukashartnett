@@ -9,7 +9,7 @@ class Enemy {
   
   shoot(enemyBullets) {
     this.shootTimer++;
-    if (this.shootTimer > 90) { // shoot every ~1.5 seconds
+    if (this.shootTimer > 90) { 
       enemyBullets.push(new EnemyBullet(this.x, this.y + this.size / 2));
       this.shootTimer = 0;
     }
@@ -20,7 +20,7 @@ class Enemy {
     }
   
     display() {
-      fill(255, 0, 0); // red enemy
+      fill(255, 0, 0); 
       ellipse(this.x, this.y, this.size);
     }
   
