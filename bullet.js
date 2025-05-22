@@ -8,19 +8,19 @@ class Bullet {
   update(enemies) {
     this.y -= this.speed;
 
-    // Check for collision with enemies
+
     for (let i = enemies.length - 1; i >= 0; i--) {
       if (dist(this.x, this.y, enemies[i].x, enemies[i].y) < 30) {
-        enemies.splice(i, 1); // Remove enemy
-        return true; // Signal to remove this bullet too
+        enemies.splice(i, 1);
+        return true; 
       }
     }
 
-    return false; // No collision
+    return false; 
   }
 
   display() {
-    fill(255, 255, 0); // yellow bullet
+    fill(255, 255, 0);
     noStroke();
     ellipse(this.x, this.y, 8, 16);
   }

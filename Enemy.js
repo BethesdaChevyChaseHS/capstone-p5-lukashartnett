@@ -2,30 +2,24 @@ class Enemy {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.size = 40;
     this.speed = 2;
-    this.shootTimer = 0;
+    this.size = 40;
+    this.image = enemyImg;
   }
-  
-  shoot(enemyBullets) {
-    this.shootTimer++;
-    if (this.shootTimer > 90) { 
-      enemyBullets.push(new EnemyBullet(this.x, this.y + this.size / 2));
-      this.shootTimer = 0;
-    }
+
+  update() {
+    this.y += this.speed;
   }
-  
-    update() {
-      this.y += this.speed;
-    }
-  
-    display() {
-      fill(255, 0, 0); 
-      ellipse(this.x, this.y, this.size);
-    }
-  
-    isOffScreen() {
-      return this.y > height + this.size;
-    }
+
+  display() {
+    image(this.image, this.x, this.y, this.size, this.size);
   }
-  
+
+  isOffScreen() {
+    return this.y > height;
+  }
+
+  hit(bullet) {
+    return dist(this.x + this.size / 2, this.y + this.size / 2, bullet.x, bullet.y) < this.size / 2;
+  }
+}

@@ -7,7 +7,7 @@ class Player {
     this.height = 80;
     this.speed = 5;
     this.health = 3;
-    this.hitTimer = 0; 
+    this.hitTimer = 0;
   }
 
   move() {
@@ -23,24 +23,25 @@ class Player {
   takeDamage() {
     if (this.hitTimer === 0) {
       this.health--;
-      this.hitTimer = 30; 
+      this.hitTimer = 30;
     }
   }
 
   display() {
     if (this.hitTimer > 0) {
-      tint(255, 0, 0); // red tint
+      tint(255, 0, 0); // red flash
       this.hitTimer--;
     } else {
       noTint();
     }
+
     image(this.img, this.x, this.y, this.width, this.height);
 
     // Draw health text
     noStroke();
     fill(255);
     textSize(20);
-    textAlign(LEFT);
-    text("Health: " + this.health, 10, 25);
+    textAlign(LEFT, TOP);
+    text("Health: " + this.health, 10, 40); 
   }
 }

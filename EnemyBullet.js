@@ -11,7 +11,7 @@ class EnemyBullet {
   }
 
   display() {
-    fill(0); // black bullet
+    fill(0); 
     noStroke();
     ellipse(this.x, this.y, this.size);
   }

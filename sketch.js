@@ -1,14 +1,17 @@
 let player;
 let spaceshipImg;
 let backgroundImg;
+let enemyImg;
 let bullets = [];
 let enemies = [];
 let enemyBullets = [];
 let enemySpawnTimer = 0;
+let score = 0;
 
 function preload() {
   spaceshipImg = loadImage("assets/spaceship.png");
   backgroundImg = loadImage("assets/space-bg.png");
+  enemyImg = loadImage("assets/enemy.png"); 
 }
 
 function setup() {
@@ -21,7 +24,7 @@ function draw() {
   player.move();
   player.display();
 
-  // Update and display player bullets + check collisions
+
   for (let i = bullets.length - 1; i >= 0; i--) {
     let hit = bullets[i].update(enemies);
     bullets[i].display();
@@ -31,11 +34,11 @@ function draw() {
     }
   }
 
- 
+  // Spawn enemies
   enemySpawnTimer++;
   if (enemySpawnTimer > 60) {
     let enemyX = random(40, width - 40);
-    enemies.push(new Enemy(enemyX, -40));
+    enemies.push(new Enemy(enemyX, -40, enemyImg));
     enemySpawnTimer = 0;
   }
 
@@ -44,7 +47,6 @@ function draw() {
     enemies[i].update();
     enemies[i].display();
 
-    // Enemy shoots every 90 frames
     if (frameCount % 90 === 0) {
       enemyBullets.push(new EnemyBullet(enemies[i].x + 20, enemies[i].y + 20));
     }
@@ -54,7 +56,7 @@ function draw() {
     }
   }
 
-  // Update and display enemy bullets
+  
   for (let i = enemyBullets.length - 1; i >= 0; i--) {
     enemyBullets[i].update();
     enemyBullets[i].display();
@@ -69,6 +71,11 @@ function draw() {
       enemyBullets.splice(i, 1);
     }
   }
+
+  fill(255);
+  textSize(24);
+  textAlign(LEFT, TOP);
+  text("Score: " + score, 10, 10);
 
   // Game over
   if (player.health <= 0) {
