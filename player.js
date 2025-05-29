@@ -42,6 +42,6 @@ class Player {
     fill(255);
     textSize(20);
     textAlign(LEFT, TOP);
-    text("Health: " + this.health, 10, 40); 
+    text("Health: " + this.health, 10, 40); // below score
   }
 }

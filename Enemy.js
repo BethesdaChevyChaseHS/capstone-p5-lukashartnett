@@ -4,7 +4,7 @@ class Enemy {
     this.y = y;
     this.speed = 2;
     this.size = 40;
-    this.image = enemyImg;
+    this.image = enemyImg; 
   }
 
   update() {

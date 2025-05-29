@@ -8,15 +8,15 @@ class Bullet {
   update(enemies) {
     this.y -= this.speed;
 
-
     for (let i = enemies.length - 1; i >= 0; i--) {
-      if (dist(this.x, this.y, enemies[i].x, enemies[i].y) < 30) {
+      if (dist(this.x, this.y, enemies[i].x + enemies[i].size / 2, enemies[i].y + enemies[i].size / 2) < enemies[i].size / 2) {
         enemies.splice(i, 1);
-        return true; 
+        score++;
+        return true;
       }
     }
 
-    return false; 
+    return false;
   }
 
   display() {
