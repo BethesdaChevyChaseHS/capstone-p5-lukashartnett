@@ -11,7 +11,7 @@ let score = 0;
 function preload() {
   spaceshipImg = loadImage("assets/spaceship.png");
   backgroundImg = loadImage("assets/space-bg.png");
-  enemyImg = loadImage("assets/enemy.png"); // Make sure this image exists
+  enemyImg = loadImage("assets/enemy.png"); 
 }
 
 function setup() {
